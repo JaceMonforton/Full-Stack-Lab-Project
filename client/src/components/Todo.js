@@ -82,6 +82,7 @@ function Todo() {
         } catch (error) {
             dispatch(hideLoading());
             toast.error(error.message);
+            console.log(error)
         }
     };
 
