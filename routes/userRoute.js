@@ -88,6 +88,7 @@ const Task = require('../models/taskModel');
 
   router.get('/:userId/get-user-info-by-id', async (req, res) => {
     const userId = req.params.userId;
+    
     try {
       const user = await User.findById(userId);
   
