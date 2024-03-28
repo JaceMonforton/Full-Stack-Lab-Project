@@ -215,10 +215,27 @@ const Task = require('../models/taskModel');
   }
   });
 
+  router.get('/:userId/completeTasks', async (req, res) => {
+    const userId = req.params.userId;
+
+    try {
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ success: false, error: "User not found" });
+        }
+        const completeTasks = user.completeTasks; 
+        res.status(200).json({ success: true, completeTasks });
+    } catch (error) {
+        console.error('Error fetching tasks:', error);
+        res.status(500).json({ success: false, error: 'Internal Server Error' });
+    }
+  });
+
   router.put('/:userId/tasks/:taskId/complete', async (req, res) => {
     const taskId = req.params.taskId;
     const userId = req.params.userId;
-
+    console.log("Request Parameters:", req.params);
     try {
         const user = await User.findById(userId);
   
@@ -248,49 +265,10 @@ const Task = require('../models/taskModel');
         console.error('Error marking task as complete and moving to completeTasks:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
-});
-
-  router.get('/:userId/completeTasks', async (req, res) => {
-    const userId = req.params.userId;
-
-    try {
-        const user = await User.findById(userId);
-
-        if (!user) {
-            return res.status(404).json({ success: false, error: "User not found" });
-        }
-        const completeTasks = user.completeTasks; 
-        res.status(200).json({ success: true, completeTasks });
-    } catch (error) {
-        console.error('Error fetching tasks:', error);
-        res.status(500).json({ success: false, error: 'Internal Server Error' });
-    }
   });
 
-  router.put('/:userId/tasks/editedTask', async (req, res) => {
-    const { userId } = req.params;
 
-    try {
-        const editedTask = await User.findByIdAndUpdate(userId, {
-          savedTasks: {
-          taskText: req.body.taskText,
-          taskDate: req.body.taskDate,
-          taskPriority: req.body.taskPriority,
-          taskTime: req.body.taskTime,
-        }
-        });
 
-        if (!editedTask) {
-            return res.status(404).json({ success: false, message: 'Task not found' });
-        }
-        await editedTask.save();
-
-        return res.status(200).json({ success: true, task: editedTask });
-    } catch (error) {
-        console.error('Error updating task:', error);
-        return res.status(500).json({ success: false, message: 'Internal server error' });
-    }
-});
 
 
 

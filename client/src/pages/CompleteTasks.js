@@ -14,8 +14,10 @@ function CompleteTasks() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+
         const fetchTasks = async () => {
             try {
+
                 dispatch(showLoading());
                 console.log('Fetching Saved Tasks...');
 
@@ -30,7 +32,6 @@ function CompleteTasks() {
                     }
                 }
 
-
                 const userData = await response.json();
                 
                 if (userData.completeTasks.length === 0) {
@@ -44,12 +45,14 @@ function CompleteTasks() {
                 } else {
                     setTasks([]);
                 }
+
             } catch (error) {
                 dispatch(hideLoading());
                 console.error('Error fetching tasks:', error);
                 toast.error(error.message);
             }
         };
+
         if (user?._id) {
             fetchTasks();
         }
@@ -65,6 +68,7 @@ function CompleteTasks() {
                 toast.success('Task Deleted!');
                 const updatedTasks = tasks.filter(task => task._id !== taskId);
                 setTasks(updatedTasks);
+                window.location.reload();
             } else {
                 toast.error('Failed to delete task');
             }
@@ -75,6 +79,7 @@ function CompleteTasks() {
             dispatch(hideLoading()); 
         }
     };
+
     return (
         <Layout>
             <div className='card-title'>

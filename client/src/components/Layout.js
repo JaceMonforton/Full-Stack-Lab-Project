@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "../layout.css";
 import "../index.css";
 import { Link, useNavigate} from 'react-router-dom';
@@ -24,8 +24,8 @@ function Layout({children}) {
 <div className='content'>
     <div className='header'>  
     
-    <div className='d-flex p-3'>
-    <h4 className='anchor'>{user?.name}</h4>
+    <div className='d-flex'>
+    <span className='anchor p-3'>{user?.email}</span>
     </div>
                  <Link className='anchor' to='/login' onClick={()=> {onLogout()}}>
                     <i className ='ri-logout-box-line' />

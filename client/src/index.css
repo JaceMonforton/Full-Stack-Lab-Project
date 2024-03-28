@@ -99,9 +99,8 @@ input {
   }
   
   .anchor {
+
     color: black !important;
-    text-decoration: underline;
-    text-underline-offset: 6px !important;
     font-size: 16px !important;
     transition: 0.2s;
 
@@ -128,5 +127,42 @@ input {
     width: 400px;
   }    
 
-
   /* Todo list Styles */ 
+  .task-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .task-header {
+    margin-bottom: 8px;
+  }
+  
+  .task-header h3 {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .task-header .priority-1 {
+    color: rgba(0, 128, 0, 0.7);
+}
+
+.task-header .priority-2 {
+    color: rgba(255, 166, 0, 0.7);
+}
+
+.task-header .priority-3 {
+    color: rgba(255, 0, 0, 0.7);
+}
+
+  .task-details {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .task-actions {
+    margin-top: 16px;
+  }
+  
