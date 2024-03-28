@@ -267,6 +267,31 @@ const Task = require('../models/taskModel');
     }
   });
 
+  router.put('/:userId/tasks/editedTask', async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+        const editedTask = await User.findByIdAndUpdate(userId, {
+          savedTasks: {
+          taskText: req.body.taskText,
+          taskDate: req.body.taskDate,
+          taskPriority: req.body.taskPriority,
+          taskTime: req.body.taskTime,
+        }
+        });
+
+        if (!editedTask) {
+            return res.status(404).json({ success: false, message: 'Task not found' });
+        }
+        await editedTask.save();
+
+        return res.status(200).json({ success: true, task: editedTask });
+    } catch (error) {
+        console.error('Error updating task:', error);
+        return res.status(500).json({ success: false, message: 'Internal server error' });
+    }
+});
+
 
 
 

@@ -110,6 +110,11 @@ input {
     text-decoration: underline !important;
   }
 
+
+  .custom-button {
+    width: 96px;
+  }
+
 /*  Auth Pages:  */
 .authentication {
     height: 100vh;
